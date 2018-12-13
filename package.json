@@ -1,0 +1,26 @@
+{
+  "name": "fullstack_app",
+  "version": "1.0.0",
+  "description": "a place where word matters",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "server": "concurrently \"npm run dev\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "George Wisdom",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.15"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.8"
+  }
+}
