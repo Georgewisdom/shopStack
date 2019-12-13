@@ -13,13 +13,15 @@ app.use(cors())
 
 // connect to mongo URI
 mongoose.connect('mongodb://george1:george1@ds245548.mlab.com:45548/medium', {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
 .then(() => console.log('mongdb connected.....'))
 .catch(err => console.log(err))
 
 // use routes
 app.use('/api/Items', items); 
+app.use('/api/user', require('./routes/api/User')); 
 
 // Serve our static asset if in production 
 if(process.env.NODE_ENV === 'production'){

@@ -1,5 +1,5 @@
 const express = require('express');
-
+const authenticate = require('../../authentication/authenticate')
 const router = express.Router();
 
 // Import Items Model 
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 // @routes POST api/items
 // desc POST to the database 
 // @access Public
-router.post('/', (req, res) => {
+router.post('/', authenticate, (req, res) => {
    // here we need to construct an items that will be sent to the database 
    const newItem = new Item({
        name: req.body.name,
@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 // @routes DELETE /api/Items
 // desc DELETE An Item
 // @access Public
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authenticate, (req, res) => {
    // to delete an items we first need to find that items 
    // according to this example we are gonna find it by id 
    Item.findById(req.params.id)
@@ -46,7 +46,7 @@ router.delete('/:id', (req, res) => {
  // @routes PUT /api/Items
 // desc UPDATE An Item
 // @access Public
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticate, (req, res) => {
     // to update we are gonna use the mongodb update method
     // 
     Item.updateOne({_id: req.params.id}, {name: req.body.name}, {upsert: true} ).then(() => res.json({updated: true}))
